@@ -47,10 +47,14 @@ public class MainActivity2 extends AppCompatActivity {
             num.setError("Please Enter code");
             num.requestFocus();
             return;
-        }else if(!c.matches(String.valueOf(code))){
-            num.setError("Please Enter code");
+        }else if(!c.matches(String.valueOf(code))) {
+            num.setError("Please Enter Valid Code");
             num.requestFocus();
             return;
+        }else if(c.length() < 6 || c.length() > 6){
+                num.setError("Please Enter Code That is 6 Digits");
+                num.requestFocus();
+                return;
         }else if (c.matches(String.valueOf(code))){
             Toast.makeText(this, "Email Confirmed", Toast.LENGTH_SHORT).show();
         }

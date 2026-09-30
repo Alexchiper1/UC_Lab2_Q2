@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         int randomnum = 100000 + (int)(Math.random() * 900000);
+        Toast.makeText(this, "Code: " + randomnum, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_EMAIL, email);
+        intent.setData(Uri.parse("mailto:" + email));
         intent.putExtra(Intent.EXTRA_SUBJECT, "Verification Code");
         intent.putExtra(Intent.EXTRA_TEXT, randomnum);
         if (intent.resolveActivity(getPackageManager()) != null) {
