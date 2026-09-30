@@ -1,6 +1,7 @@
 package com.example.uc_lab2_q2;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -73,8 +74,20 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        Intent intent = new Intent(this, MainActivity2.class);
-        intent.putExtra("email",email);
+        int randomnum = (int)(Math.random() * 1000000);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, email);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Verification Code");
+        intent.putExtra(Intent.EXTRA_TEXT, randomnum);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+        Intent emailintent = new Intent(this, MainActivity2.class);
+        emailintent.putExtra("email",email);
+        emailintent.putExtra("randomnum", randomnum);
         startActivity(intent);
 
     }

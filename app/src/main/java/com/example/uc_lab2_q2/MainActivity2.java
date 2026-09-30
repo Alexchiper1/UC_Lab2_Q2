@@ -14,9 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity2 extends AppCompatActivity {
-
-    int randomnum = (int)(Math.random() * 1000000);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +23,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         TextView text = findViewById(R.id.email);
         String email = getIntent().getStringExtra("email");
-        text.setText("You need to confirm your email " + email + " please enter code: " + randomnum + " to confirm email.");
+
+        text.setText("You need to confirm your email " + email + " please enter code");
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -35,6 +33,8 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
+    int code = getIntent().getIntExtra("randomnum", -1);
+
     public void confirme(View view) {
         EditText num = findViewById(R.id.code);
 
@@ -44,12 +44,12 @@ public class MainActivity2 extends AppCompatActivity {
             num.setError("Please Enter code");
             num.requestFocus();
             return;
-        }else if (!c.matches(String.valueOf(randomnum))){
-            num.setError("Incorrect code: Try again");
+        }else if(!c.matches(String.valueOf(code))){
+            num.setError("Please Enter code");
             num.requestFocus();
             return;
-        } else if (c.matches(String.valueOf(randomnum))) {
-            Toast.makeText(this, "Email confirmed", Toast.LENGTH_SHORT).show();
+        }else if (c.matches(String.valueOf(code))){
+            Toast.makeText(this, "Email Confirmed", Toast.LENGTH_SHORT).show();
         }
     }
 }
