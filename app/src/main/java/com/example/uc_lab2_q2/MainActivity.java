@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, MainActivity2.class);
-        intent.putExtra("name",name);
+        intent.putExtra("email",email);
         startActivity(intent);
 
     }
