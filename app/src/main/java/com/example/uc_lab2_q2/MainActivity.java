@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int randomnum = (int)(Math.random() * 1000000);
+        int randomnum = 100000 + (int)(Math.random() * 900000);
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Intent emailintent = new Intent(this, MainActivity2.class);
         emailintent.putExtra("email",email);
         emailintent.putExtra("randomnum", randomnum);
-        startActivity(intent);
+        startActivity(emailintent);
 
     }
 }

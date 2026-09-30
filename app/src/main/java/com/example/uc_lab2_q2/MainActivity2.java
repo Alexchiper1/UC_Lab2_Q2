@@ -14,12 +14,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity2 extends AppCompatActivity {
+
+    int code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main2);
 
+        code = getIntent().getIntExtra("randomnum", -1);
 
         TextView text = findViewById(R.id.email);
         String email = getIntent().getStringExtra("email");
@@ -33,7 +37,6 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
-    int code = getIntent().getIntExtra("randomnum", -1);
 
     public void confirme(View view) {
         EditText num = findViewById(R.id.code);
