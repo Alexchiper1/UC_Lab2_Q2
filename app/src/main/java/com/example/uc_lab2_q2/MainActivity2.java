@@ -1,4 +1,4 @@
-package com.example.userformlab2;
+package com.example.uc_lab2_q2;
 
 import android.content.Intent;
 import android.os.Bundle;

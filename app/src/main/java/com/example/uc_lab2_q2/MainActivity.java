@@ -77,8 +77,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("name",name);
         startActivity(intent);
 
-        //Toast.makeText(this, "Thank you "+ name +", your request is being processed", Toast.LENGTH_SHORT).show();
-    }
-}
     }
 }
