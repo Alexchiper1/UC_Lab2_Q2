@@ -16,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    int randomnum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,21 +76,38 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int randomnum = 100000 + (int)(Math.random() * 900000);
-        Toast.makeText(this, "Code: " + randomnum, Toast.LENGTH_SHORT).show();
+        randomnum = 100000 + (int)(Math.random() * 900000);
+        //Toast.makeText(this, "Code: " + randomnum, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:" + email));
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Verification Code");
-        intent.putExtra(Intent.EXTRA_TEXT, randomnum);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+        intent.putExtra(Intent.EXTRA_TEXT, "Code: " + randomnum);
+        startActivity(intent);
+
+    }
+
+    public void confirme(View view) {
+        EditText num = findViewById(R.id.code);
+
+        String c = num.getText().toString();
+
+
+        if(c.isEmpty()) {
+            num.setError("Please Enter code");
+            num.requestFocus();
+            return;
+        }else if(!c.matches(String.valueOf(randomnum))) {
+            num.setError("Please Enter Valid Code");
+            num.requestFocus();
+            return;
+        }else if(c.length() != 6){
+            num.setError("Please Enter Code That is 6 Digits");
+            num.requestFocus();
+            return;
+        }else if (c.matches(String.valueOf(randomnum))){
+            Toast.makeText(this, "Email Confirmed", Toast.LENGTH_SHORT).show();
         }
-
-        Intent emailintent = new Intent(this, MainActivity2.class);
-        emailintent.putExtra("email",email);
-        emailintent.putExtra("randomnum", randomnum);
-        startActivity(emailintent);
-
     }
 }
